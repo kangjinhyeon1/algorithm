@@ -17,3 +17,6 @@ def dfs(i, max):
     else:
         dfs(i+1, max+s[i])
         dfs(i+1, max)
+
+
+print()
