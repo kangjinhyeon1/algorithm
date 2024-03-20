@@ -37,5 +37,3 @@ def DFS(i, s):
 DFS(0, 0)
 
 print("NO")
-
-print()

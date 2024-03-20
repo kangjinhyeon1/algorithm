@@ -1,22 +1,23 @@
 import sys
 
-# 아직 해결 안됨 바둑이문제
-
 m, t = map(int, input().split())
 
 s = []
 for _ in range(t):
     s.append(int(input()))
 
+res = []
 
-def dfs(i, max):
+
+def DFS(i, max):
     if max > m:
         return
     if i == t:
-        print(max)
+        res.append(max)
     else:
-        dfs(i+1, max+s[i])
-        dfs(i+1, max)
+        DFS(i+1, max+s[i])
+        DFS(i+1, max)
 
 
-print()
+DFS(0, 0)
+print(max(res))
