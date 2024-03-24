@@ -10,44 +10,50 @@ for i in range(n):
 
 
 # 정답
-# import sys
-# input = sys.stdin.readline
+# import sys;
 
-# from collections import deque
+# def bfs(N, M, r, c):
+#     Q.append((r, c))
+#     # 이 문제의 경우, visited를 bfs 함수 안에 넣어줘야한다.
+#     visited = [[0] * M for _ in range(N)]
+#     visited[r][c] = 1
+#     sums = 0
+#     while Q:
+#         r, c = Q.popleft()
+#         for di, dj in [[1, 0], [0, 1], [-1, 0], [0, -1]]:
+#             nr, nc = r + di, c + dj
+#             if 0 <= nr < N and 0 <= nc < M:
+#                 if maps[nr][nc] == 'L' and visited[nr][nc] == 0:
+#                     visited[nr][nc] = visited[r][c] + 1
+#                     sums = max(sums, visited[nr][nc])
+#                     Q.append((nr, nc))
+#     return sums - 1
 
-# r, c = map(int, input().strip().split())
-# graph = []
-# for _ in range(c):
-#   graph.append(list(input()))
 
-# # 상하좌우
-# dx = [0, 0, -1, 1]
-# dy = [-1, 1, 0, 0]
+# N, M = map(int, sys.stdin.readline().split())
 
-# def bfs(i,j):
-#   queue=deque()
-#   queue.append((i,j))
-#   visited = [[0]*c for _ in range(r)]
-#   visited[i][j] = 1
-#   cnt = 0
+# maps = [list(sys.stdin.readline().rstrip()) for _ in range(N)]
 
-#   while queue:
-#     x,y = queue.popleft()
-#     for i in range(4):
-#       nx = x + dx[i]
-#       ny = y + dy[i]
-#       if nx < 0 or nx >= r or ny < 0 or ny >= c:
-#         continue
-#       elif graph[nx][ny] == 'L' and visited[nx][ny] == 0:
-#         visited[nx][ny] = visited[x][y] + 1
-#         cnt = max(cnt, visited[nx][ny])
-#         queue.append((nx, ny))
-#   return cnt-1
+# Q = deque()
+# visited = [[0] * M for _ in range(N)]
 
 # result = 0
-# for i in range(r):
-#   for j in range(c):
-#     if graph[i][j] == 'L':
-#       result = max(result, bfs(i,j))
+# for i in range(N):
+#     for j in range(M):
+#         '''
+#         그냥 map이 L일 때 bfs를 돌리면, 모든 L에 대해 bfs를 돌리기 때문에
+#         시간 초과가 난다.
+#         간단한 조건만 걸어주면 된다.
+#         조건은 map이 L이고 양 옆, 또는 위 아래가 L이 아닐 때 bfs를 돌리면 된다.
+#         최적의 조건은 아닌 것 같지만 어찌저지 통과는 된다.
+#         '''
+#         if maps[i][j] == 'L' and visited[i][j] == 0:
+#             if 0 <= i - 1 < N and 0 <= i + 1 < N:
+#                 if maps[i - 1][j] == 'L' and maps[i + 1][j] == 'L':
+#                     continue
+#             if 0 <= j - 1 < M and 0 <= j + 1 < M:
+#                 if maps[i][j - 1] == 'L' and maps[i][j + 1] == 'L':
+#                     continue
+#             result = max(result, bfs(N, M, i, j))
 
 # print(result)
