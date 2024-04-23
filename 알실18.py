@@ -10,6 +10,7 @@ for i in range(n):
 
 res = []
 res.append(graph[n//2][n//2])
+graph[n//2][n//2] = 0
 
 
 def bfs(z):
@@ -25,6 +26,7 @@ def bfs(z):
                 nx = x + dx[i]
                 ny = y + dy[i]
                 res.append(graph[nx][ny])
+                graph[nx][ny] = 0
                 queue.append((nx, ny))
     return
 
