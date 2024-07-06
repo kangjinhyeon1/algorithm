@@ -20,7 +20,7 @@ def bfs(x):
                 visited[x][i] = 1
 
 
-for i in range(0, n):
+for i in range(n):
     bfs(i)
 
 # 배열 없애서 출력하기
